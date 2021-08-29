@@ -28,7 +28,7 @@ function selectImage(event) {
     return;
   }
   for (const item of galleryItems) {
-    if (event.srcElement.src === item.preview) {
+    if (event.target.src === item.preview) {
       const instance = basicLightbox.create(`
     <img src=${item.original}>
 `)
