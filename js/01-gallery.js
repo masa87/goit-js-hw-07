@@ -3,23 +3,24 @@ import { galleryItems } from './gallery-items.js';
 const qs = (selector) => document.querySelector(selector);
 const gallery = qs('.gallery');
 
-
-const createGrid = galleryItems => {
-  for (const item of galleryItems) {
+const createGrid = galleryItems  => {
+  galleryItems.forEach(item => {
     const galleryItem = document.createElement("div");
     galleryItem.classList.add("gallery__item")
     gallery.append(galleryItem);
+
     const galleryLink = document.createElement("a");
     galleryLink.classList.add("gallery__link");
     galleryLink.href = item.original;
     galleryItem.append(galleryLink);
+
     const galleryImg = document.createElement("img");
     galleryImg.classList.add("gallery__image");
     galleryImg.src = item.preview;
     galleryImg.dataset.source = item.original;
     galleryImg.alt = item.description;
     galleryLink.append(galleryImg);
-  }
+  })
 }
 
 function selectImage(event) {
@@ -27,15 +28,19 @@ function selectImage(event) {
   if (event.target.nodeName !== "IMG") {
     return;
   }
-  for (const item of galleryItems) {
+  galleryItems.forEach(item => {
+    const instance = basicLightbox.create(`<img src=${item.original}>`)
     if (event.target.src === item.preview) {
-      const instance = basicLightbox.create(`
-    <img src=${item.original}>
-`)
-
-instance.show()
+      instance.show();
     }
-  }
+    if (instance.visible() === true) {
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          instance.close();
+        }
+      });
+    }
+  })
 }
 
 createGrid(galleryItems)
