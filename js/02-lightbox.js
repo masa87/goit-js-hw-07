@@ -18,17 +18,18 @@ const createGrid = galleryItems => {
     galleryImg.alt = item.description;
     galleryLink.append(galleryImg);
   })
-}
-
-function selectImage(event) {
-  event.preventDefault();
-  const lightbox = new SimpleLightbox(".gallery a", {
+  
+  let lightbox = new SimpleLightbox(".gallery a", {
     captionPosition: "outside",
     captionsData: "alt",
     captionDelay: "250",
   });
-
 }
 
+
 createGrid(galleryItems)
-gallery.addEventListener("click", selectImage)
+
+gallery.addEventListener("click", e => {
+  e.preventDefault();
+  
+})
