@@ -18,14 +18,12 @@ const createGrid = galleryItems => {
     galleryImg.alt = item.description;
     galleryLink.append(galleryImg);
   })
-  
   let lightbox = new SimpleLightbox(".gallery a", {
     captionPosition: "outside",
     captionsData: "alt",
     captionDelay: "250",
   });
 }
-
 
 createGrid(galleryItems)
 
