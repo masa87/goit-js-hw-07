@@ -27,7 +27,4 @@ const createGrid = galleryItems => {
 
 createGrid(galleryItems)
 
-gallery.addEventListener("click", e => {
-  e.preventDefault();
-  
-})
+gallery.addEventListener("click", e => e.preventDefault())
